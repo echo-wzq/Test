@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <button onclick='tableToExcel()'>导出</button>
+    </head>
+<body>
+<script>
+    const tableToExcel = () => {
+        // 要导出的json数据
+        const jsonData = [
+            {
+                name:'160341',
+                phone:'王五',
+                email:'女',
+                s:"21",
+                d:"信管1601",
+                f:"信息管理与信息系统",
+                a:"计算机学院",
+                w:"334.6"
+            },
+            {
+                name:'170340',
+                phone:'张三',
+                email:'男',
+                s:"20",
+                d:"计科1701",
+                f:"计算机",
+                a:"计算机学院",
+                w:"335.5"
+            },
+            {
+                name:'170339',
+                phone:'李四',
+                email:'男',
+                s:"20",
+                d:"计科1701",
+                f:"计算机",
+                a:"计算机学院",
+                w:"322"
+            },
+            {
+                name:'170343',
+                phone:'陈留',
+                email:'男',
+                s:"21",
+                d:"计科1701",
+                f:"计算机",
+                a:"计算机学院",
+                w:"326.5"
+            },
+            {
+                name:'160342',
+                phone:'盛祎琛',
+                email:'女',
+                s:"20",
+                d:"计科1701",
+                f:"计算机",
+                a:"计算机学院",
+                w:"340.5"
+            },
+            {
+                name:'160346',
+                phone:'曾智',
+                email:'女',
+                s:"20",
+                d:"信管1601",
+                f:"信息管理与信息系统",
+                a:"计算机学院",
+                w:"230.5"
+            },
+            {
+                name:'160348',
+                phone:'多罗罗',
+                email:'男',
+                s:"20",
+                d:"信管1601",
+                f:"信息管理与信息系统",
+                a:"计算机学院",
+                w:"235.5"
+            },
+            {
+                name:'160349',
+                phone:'伊藤健太郎',
+                email:'男',
+                s:"20",
+                d:"信管1601",
+                f:"信息管理与信息系统",
+                a:"计算机学院",
+                w:"143.5"
+            },
+            {
+                name:'160350',
+                phone:'贺来贤人',
+                email:'男',
+                s:"20",
+                d:"信管1601",
+                f:"信息管理与信息系统",
+                a:"计算机学院",
+                w:"254.5"
+            },
+            {
+                name:'160351',
+                phone:'服部平次',
+                email:'男',
+                s:"20",
+                d:"信管1601",
+                f:"信息管理与信息系统",
+                a:"计算机学院",
+                w:"276"
+            },
+        ];
+
+        // 列标题，逗号隔开，每一个逗号就是隔开一个单元格
+        let str = `学号,姓名,性别,年龄,班级,专业,院系,总分\n`;
+
+        // 增加\t为了不让表格显示科学计数法或者其他格式
+        for(let i = 0 ; i < jsonData.length ; i++ ){
+            for(const key in jsonData[i]){
+                str+=`${jsonData[i][key] + '\t'},`;
+            }
+            str+='\n';
+        }
+
+        // encodeURIComponent解决中文乱码
+        const uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+
+        // 通过创建a标签实现
+        const link = document.createElement("a");
+        link.href = uri;
+
+        // 对下载的文件命名
+        link.download =  "学生成绩表.xls";
+        link.click();
+    }
+</script>
+</body>
+</html>
